@@ -33,22 +33,23 @@ RSpec.describe QuestionsController, :type => :controller do
     end
   end
 
-  # describe "#create" do
-  #   it "creates a new question" do
-  #     user = FactoryGirl.create(:user)
-  #     sign_in(user)
-  #     expect {
-  #     post :create, {'question' => {content: "Hello!"}
-  #     }}.to eq(Question.last)
-  #   end
-  # end
+  describe "#create" do
+    it "creates a question" do
+      user = FactoryGirl.create(:user)
+      sign_in(user)
+      question_params = FactoryGirl.attributes_for(:question)
+      expect { post :create, :question => question_params }.to change(Question, :count).by(1)
+    end
+  end
 
-  # describe "#remove_from_cart" do
-  #   it "removes the item from the cart" do
-  #     product = Product.create(name: "robot", image: "image",price: 2000, description: "old robot")
-  #     post :remove_from_cart, id: product.id
-  #     expect(Order.all).to_not include(Order.where(product_id: product.id))
-  #   end
-  # end
+  describe "#remove" do
+    it "deletes the question" do
+      user = FactoryGirl.create(:user)
+      sign_in(user)
+      question = Question.create(content: "Hello!", user_id: user.id)
+      delete :remove, id: question.id
+      expect(Question.all).to_not include(question)
+    end
+  end
 
 end
