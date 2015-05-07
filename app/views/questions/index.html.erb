@@ -1,0 +1,10 @@
+<h1>Questions:</h1>
+<% if @questions %>
+  <% @questions.each do |question| %>
+    <ul>
+      <li> <%= question.question %>, <%= User.find(question.user_id).name %> <%= link_to "See Answers", question_path(question.id) %></li>
+    </ul>
+  <%end%>
+<%end%>
+<br>
+<%= link_to "Ask a question?", new_question_path, method: :post %>
