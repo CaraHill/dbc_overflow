@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :remove]
 
   def index
     @questions = Question.all
@@ -21,6 +21,11 @@ class QuestionsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def remove
+    Question.find(params[:id]).destroy
+    redirect_to root_path
   end
 
   private

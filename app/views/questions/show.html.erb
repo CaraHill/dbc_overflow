@@ -1,5 +1,5 @@
 <ul>
-  <li><%= @question.question %>, <%= @user.name %></li>
+  <li><%= @question.content %>, <%= @user.name %> <%= link_to "Remove", remove_question_path(@question.id), method: :delete %></li>
 </ul>
 <br>
-<%= link_to "Ask another question?", new_question_path %>
+<%= link_to "Ask another question?", new_question_path if current_user %>
