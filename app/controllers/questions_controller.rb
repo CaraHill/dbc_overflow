@@ -2,30 +2,51 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :remove]
 
   def index
-    @questions = Question.all
+    render json: Question.all
   end
 
   def show
-    @question = Question.find(params[:id])
-    @user = User.find(@question.user_id)
+    if @question = Question.find(params[:id])
+      render status: 200, json: {
+        question: question,
+        message: "Your request was successful."
+      }
+    else
+      render status: 404, json: {
+        message: "Your request was not successful. Please try again."
+      }
+    end
   end
 
   def new
-    @question = Question.new
+    render json: Question.new
   end
 
   def create
     @question = Question.new(question_params)
     if @question.save
-      redirect_to root_path
+      render status: 200, json: {
+        question: @question,
+        message: "Your request was successful."
+      }
     else
-      render :new
+      render status: 400, json: {
+        message: "Your request was not successful. Please try again."
+      }
     end
   end
 
   def remove
-    Question.find(params[:id]).destroy
-    redirect_to root_path
+    question = Question.find(params[:id])
+    if question.destroy
+      render status: 200, json: {
+        message: "Your request was successful."
+      }
+    else
+      render status: 400, json: {
+        message: "Your request was not successful. Please try again."
+      }
+    end
   end
 
   private

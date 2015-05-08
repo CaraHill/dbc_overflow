@@ -1,0 +1,26 @@
+function Controller(){
+
+}
+
+Controller.prototype.run = function(){
+  console.log("IN RUN!!!")
+  $.ajax({
+    url: "/",
+    type: "GET",
+    success: function(data) {
+      for(var i=0; i< data.length; i++) {
+        console.log("in for loop")
+        var question = data[i]
+        var questionId = question.id
+        var user = <%= User.find(question.user_id).name %>
+        var questionDiv = 'div class="question" data-question-id="'+questionId+'">'+question.content+user+'<a class="delete-button" href="">Delete</a> '+'<a class="answers-button" href="">See Answers</a>'
+        $('#dbc_stack').append(questionDiv);
+      }
+    },
+    failure: function() {
+      alert("We could not load the questions.")
+    }
+  });
+
+}
+
