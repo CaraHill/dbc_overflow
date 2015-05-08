@@ -25,11 +25,26 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 
   describe "#show" do
+
+    before do
+      @user = FactoryGirl.create(:user)
+      @question = Question.create(content: "Hello!", user_id: @user.id)
+      get :show, id: @question.id
+    end
+
+    describe "response" do
+      it "responds successfully with an HTTP 200 status code" do
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
+
+      it "renders the show template" do
+        expect(response).to render_template("show")
+      end
+    end
+
     it "lists a specific question" do
-      user = FactoryGirl.create(:user)
-      question = Question.create(content: "Hello!", user_id: user.id)
-      get :show, id: question.id
-      expect(Question.last.id).to eq(question.id)
+      expect(Question.last.id).to eq(@question.id)
     end
   end
 
