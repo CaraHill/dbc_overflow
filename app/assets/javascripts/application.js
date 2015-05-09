@@ -15,7 +15,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(document).ready(function() {
-  var controller = new Controller;
-  controller.run;
-});
+// $(document).ready(function() {
+//   var questionsController = new QuestionsController();
+//   questionsController.run();
+// });

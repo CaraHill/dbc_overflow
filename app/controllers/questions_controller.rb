@@ -6,7 +6,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    if @question = Question.find(params[:id])
+    @question = Question.find(params[:id])
+    if @question
       render status: 200, json: {
         question: question,
         message: "Your request was successful."
