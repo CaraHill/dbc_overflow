@@ -12,7 +12,7 @@ $(document).ready(function() {
       }
     },
     failure: function() {
-      alert("We could not load the questions. Please try again later.")
+      alert("Your request was not successful. Please try again.")
     }
   });
 
@@ -42,21 +42,32 @@ $(document).ready(function() {
         $(e.target).find('input[type=text]').val("")
       },
       failure: function() {
-        alert("Your question was not added. Please try again.")
+        alert("Your request was not successful. Please try again.")
       }
     })
   })
 
   $(document).ajaxError(function (e, xhr, settings) {
         if (xhr.status == 401) {
-          alert("You need to sign in before you can complete this request.")
+          alert("You need to sign in before you can complete this request.");
           location.reload();
         }
     });
 
   $('#dbc_stack').on('click', '.delete-button', function(e) {
     e.preventDefault();
-
+    var question = $(e.target).parent();
+    var questionId = question.data('question-id');
+    $.ajax({
+      url: "/questions/"+questionId,
+      type: "DELETE",
+      success: function() {
+        question.hide();
+      },
+      failure: function() {
+        alert("Your request was not successful. Please try again.")
+      }
+    })
   })
 })
 
