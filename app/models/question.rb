@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
 
   def as_json(options = {})
     {
+      id: id,
       content: content,
       user_name: user.name
     }

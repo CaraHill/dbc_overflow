@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.build(question_params)
     if @question.save
       render status: 200, json: {
         question: @question,
@@ -53,6 +53,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:content).merge(user_id: current_user.id)
+    params.require(:question).permit(:content)
   end
 end
