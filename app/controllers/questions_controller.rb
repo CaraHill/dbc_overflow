@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :remove]
+  before_action :authenticate_user!, only: [:create, :remove]
 
   def index
     render json: Question.all

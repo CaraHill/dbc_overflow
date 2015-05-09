@@ -41,6 +41,7 @@ RSpec.describe QuestionsController, :type => :controller do
       sign_in(user)
       @question_params = FactoryGirl.attributes_for(:question)
     end
+
     it "adds a new a question to the database" do
       expect { post :create, :question => @question_params }.to change(Question, :count).by(1)
     end
