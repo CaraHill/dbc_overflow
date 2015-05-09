@@ -12,7 +12,7 @@ $(document).ready(function() {
       }
     },
     failure: function() {
-      alert("We could not load the questions. Please try again later.s")
+      alert("We could not load the questions. Please try again later.")
     }
   });
 
@@ -45,6 +45,18 @@ $(document).ready(function() {
         alert("Your question was not added. Please try again.")
       }
     })
+  })
+
+  $(document).ajaxError(function (e, xhr, settings) {
+        if (xhr.status == 401) {
+          alert("You need to sign in before you can complete this request.")
+          location.reload();
+        }
+    });
+
+  $('#dbc_stack').on('click', '.delete-button', function(e) {
+    e.preventDefault();
+
   })
 })
 
