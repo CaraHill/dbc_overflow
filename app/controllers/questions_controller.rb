@@ -5,24 +5,6 @@ class QuestionsController < ApplicationController
     render json: Question.all
   end
 
-  def show
-    @question = Question.find(params[:id])
-    if @question
-      render status: 200, json: {
-        question: question,
-        message: "Your request was successful."
-      }
-    else
-      render status: 404, json: {
-        message: "Your request was not successful. Please try again."
-      }
-    end
-  end
-
-  def new
-    render json: Question.new
-  end
-
   def create
     @question = current_user.questions.build(question_params)
     if @question.save
