@@ -7,7 +7,8 @@ $(document).ready(function() {
       for(var i=0; i< data.length; i++) {
         var question = data[i]
         var questionId = question.id
-        var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+', '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
+        var questionDiv =
+        '<div class="question" data-question-id="'+questionId+'">'+question.content+', '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<div class="new-answer"><a class="create-answer-button" href="">Answer this Question</a>'+'<form class="new-answer-form" method="post" action="/questions/'+questionId+'/answers"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+' <a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
         $('#dbc_stack').append(questionDiv);
       }
     },
@@ -36,7 +37,7 @@ $(document).ready(function() {
       success: function(data) {
         var question = data.question
         var questionId = question.id
-        var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+', '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
+        var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+', '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<a class="create-answer-button" href="">Answer this Question</a> '+'<form class="new-answer-form" method="post" action="/questions/"'+questionId+'"/answer"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+'<a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
         $('#dbc_stack').append(questionDiv);
         alert("Success! Your question was added.");
         $(e.target).find('input[type=text]').val("")
@@ -72,7 +73,7 @@ $(document).ready(function() {
 
   $('#dbc_stack').on('click', '.answers-button', function(e) {
     e.preventDefault();
-    var question = $(e.target).parent();
+    var question = $(e.target).parent().parent();
     var questionId = question.data('question-id');
     var answers = question.find('.answers-go-here');
     $.ajax({
@@ -82,13 +83,15 @@ $(document).ready(function() {
         for(var i=0; i< data.length; i++) {
           var answer = data[i];
           var answerDiv = '<div class="question-answers">'+answer.content+', '+answer.user_name+'</div>'
-          $('#dbc_stack').append(answerDiv);
+          answers.append(answerDiv);
         }
       },
       failure: function() {
         alert("Your request was not successful. Please try again.")
       }
     })
-  })
+  });
+
+
 })
 
