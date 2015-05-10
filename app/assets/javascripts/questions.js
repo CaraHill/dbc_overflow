@@ -1,9 +1,11 @@
 $(document).ready(function() {
 
   var questions = new QuestionsView();
-  var question = new QuestionView();
-  question.newQuestionDiv();
-  question.askQuestionButtonEventHandler();
+  var questionView = new QuestionView();
+  var appView = new AppView();
+  questionView.newQuestionDiv();
+  questionView.askQuestionButtonEventHandler();
+  appView.authenticationErrorAlert();
 
   $.ajax({
     url: "/questions",
@@ -16,44 +18,36 @@ $(document).ready(function() {
     }
   });
 
-  var newQuestion = function(question_element) {
+  var newQuestion = function(questionElement) {
     $.ajax({
       url: "/questions",
       type: "POST",
-      data: question_element.serialize(),
+      data: questionElement.serialize(),
       success: function(data) {
-        question.askQuestion(data, question_element);
+        questionView.askQuestion(data, questionElement);
       },
       failure: function() {
-        question.askQuestionFailure();
+        questionView.askQuestionFailure();
       }
     });
   };
 
-  question.askQuestionSubmitEventHandler(newQuestion);
+  questionView.askQuestionSubmitEventHandler(newQuestion);
 
-  $(document).ajaxError(function (e, xhr, settings) {
-        if (xhr.status == 401) {
-          alert("You need to sign in before you can complete this request.");
-          location.reload();
-        }
-    });
-
-  $('#dbc_stack').on('click', '.delete-button', function(e) {
-    e.preventDefault();
-    var question = $(e.target).parent();
-    var questionId = question.data('question-id');
+  var deleteQuestionRequest = function(questionElement, questionId) {
     $.ajax({
       url: "/questions/"+questionId,
       type: "DELETE",
       success: function() {
-        question.hide();
+        questionView.deleteQuestion(questionElement);
       },
       failure: function() {
-        alert("Your request was not successful. Please try again.")
+        questionView.deleteQuestionFailure();
       }
     })
-  });
+  }
+
+  questionView.deleteQuestionEventHandler(deleteQuestionRequest);
 
   $('#dbc_stack').on('click', '.answers-button', function(e) {
     e.preventDefault();

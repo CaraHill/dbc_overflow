@@ -18,15 +18,29 @@ QuestionView.prototype = {
     request($(e.target))
     });
   },
-  askQuestion: function(data, question_element) {
+  askQuestion: function(data, questionElement) {
     var question = data.question
     var questionId = question.id
     var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+', '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<a class="create-answer-button" href="">Answer this Question</a> '+'<form class="new-answer-form" method="post" action="/questions/"'+questionId+'"/answer"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+'<a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
     $('#dbc_stack').append(questionDiv);
     alert("Success! Your question was added.");
-    question_element.find('input[type=text]').val("")
+    questionElement.find('input[type=text]').val("")
   },
   askQuestionFailure: function() {
+    alert("Your request was not successful. Please try again.")
+  },
+  deleteQuestionEventHandler: function(request) {
+    $('#dbc_stack').on('click', '.delete-button', function(e) {
+    e.preventDefault();
+    var question = $(e.target).parent();
+    var questionId = question.data('question-id');
+    request(question, questionId);
+    });
+  },
+  deleteQuestion: function(question) {
+    question.hide();
+  },
+  deleteQuestionFailure: function() {
     alert("Your request was not successful. Please try again.")
   }
 }
