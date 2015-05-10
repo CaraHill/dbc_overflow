@@ -1,53 +1,19 @@
 $(document).ready(function() {
 
-  var questions = new QuestionsView();
+  var questionsView = new QuestionsView();
   var questionView = new QuestionView();
   var appView = new AppView();
+  var questionsModel = new QuestionsModel();
+  var questionModel = new QuestionModel();
   questionView.newQuestionDiv();
   questionView.askQuestionButtonEventHandler();
   appView.authenticationErrorAlert();
 
-  $.ajax({
-    url: "/questions",
-    type: "GET",
-    success: function(data) {
-      questions.allQuestions(data);
-    },
-    failure: function() {
-      questions.allQuestionsFailure();
-    }
-  });
+  questionsModel.getAllQuestions(questionsView.allQuestions, questionsView.allQuestionsFailure);
 
-  var newQuestion = function(questionElement) {
-    $.ajax({
-      url: "/questions",
-      type: "POST",
-      data: questionElement.serialize(),
-      success: function(data) {
-        questionView.askQuestion(data, questionElement);
-      },
-      failure: function() {
-        questionView.askQuestionFailure();
-      }
-    });
-  };
+  questionView.askQuestionSubmitEventHandler(questionModel.newQuestion);
 
-  questionView.askQuestionSubmitEventHandler(newQuestion);
-
-  var deleteQuestionRequest = function(questionElement, questionId) {
-    $.ajax({
-      url: "/questions/"+questionId,
-      type: "DELETE",
-      success: function() {
-        questionView.deleteQuestion(questionElement);
-      },
-      failure: function() {
-        questionView.deleteQuestionFailure();
-      }
-    })
-  }
-
-  questionView.deleteQuestionEventHandler(deleteQuestionRequest);
+  questionView.deleteQuestionEventHandler(questionModel.deleteQuestion);
 
   $('#dbc_stack').on('click', '.answers-button', function(e) {
     e.preventDefault();

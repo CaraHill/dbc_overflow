@@ -34,8 +34,8 @@ QuestionView.prototype = {
     e.preventDefault();
     var question = $(e.target).parent();
     var questionId = question.data('question-id');
-    request(question, questionId);
-    });
+    request(question, questionId, this.deleteQuestion, this.deleteQuestionFailure);
+    }).bind(this);
   },
   deleteQuestion: function(question) {
     question.hide();
