@@ -82,7 +82,8 @@ $(document).ready(function() {
       success: function(data) {
         for(var i=0; i< data.length; i++) {
           var answer = data[i];
-          var answerDiv = '<div class="question-answers">'+answer.content+', '+answer.user_name+'</div>'
+          var answerId = answer.id;
+          var answerDiv = '<div class="question-answers" data-answer-id="'+answerId+'">'+answer.content+', '+answer.user_name+' <a class="answer-delete-button" href="">Delete</a>'+'</div>'
           answers.append(answerDiv);
         }
       },
@@ -110,6 +111,24 @@ $(document).ready(function() {
       success: function() {
         alert("Success! Your question was added.");
         $(e.target).find('input[type=text]').val("")
+      },
+      failure: function() {
+        alert("Your request was not successful. Please try again.")
+      }
+    })
+  });
+
+  $('#dbc_stack').on('click', '.answer-delete-button', function(e) {
+    e.preventDefault();
+    var question = $(e.target).parent().parent().parent().parent();
+    var questionId = question.data('question-id');
+    var answer = question.find('.question-answers');
+    var answerId = answer.data('answer-id');
+    $.ajax({
+      url: "/questions/"+questionId+"/answers/"+answerId,
+      type: "DELETE",
+      success: function() {
+        answer.hide();
       },
       failure: function() {
         alert("Your request was not successful. Please try again.")
