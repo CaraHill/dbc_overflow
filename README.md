@@ -1,6 +1,21 @@
 Dbc Overflow
 ================
 
+User Stories
+-------------
+
+As a User I can:
+MVP:
+- Sign up/Log in
+- Post questions (authenticated)
+- Answer other users' questions (authenticated)
+- View questions and answers (authenticated or not)
+Stretch:
+- Respond to both questions and answers (authenticated)(responses are a flat list)
+
+App Generation
+------------
+
 This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
 provided by the [RailsApps Project](http://railsapps.github.io/).
 
@@ -21,28 +36,7 @@ Ruby on Rails
 
 This application requires:
 
-- Ruby 2.0.0
+- Ruby 2.2.2
 - Rails 4.2.1
 
 Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
-Getting Started
----------------
-
-Documentation and Support
--------------------------
-
-Issues
--------------
-
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
