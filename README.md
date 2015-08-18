@@ -5,11 +5,13 @@ User Stories
 -------------
 
 As a User I can:
+
 MVP:
 - Sign up/Log in
 - Post questions (authenticated)
 - Answer other users' questions (authenticated)
 - View questions and answers (authenticated or not)
+
 Stretch:
 - Respond to both questions and answers (authenticated)(responses are a flat list)
 
