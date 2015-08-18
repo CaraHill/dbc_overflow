@@ -6,7 +6,6 @@ class AnswersController < ApplicationController
     render json: question.answers
   end
 
-
   def create
     @answer = current_user.answers.build(answer_params.merge(question_id: params[:question_id]))
     if @answer.save
@@ -24,7 +23,6 @@ class AnswersController < ApplicationController
   def destroy
     question = Question.find(params[:question_id])
     answer = question.answers.find(params[:id])
-    p answer
     if answer.destroy
       render status: 200, json: {
         message: "Your request was successful."
@@ -35,7 +33,6 @@ class AnswersController < ApplicationController
       }
     end
   end
-
 
   private
 
