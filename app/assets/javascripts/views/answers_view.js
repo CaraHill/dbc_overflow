@@ -3,16 +3,17 @@ function AnswersView() {}
 AnswersView.prototype  =  {
 
   allQuestionAnswersEventHandler: function(getallAnswers) {
+    var that = this;
     $('#dbc_stack').on('click', '.answers-button', function(e) {
       e.preventDefault();
       var question = $(e.target).parent().parent();
       var questionId = question.data('question-id');
       var answers = question.find('.answers-go-here');
-      getallAnswers(questionId, this.allAnswersSuccess, this.allAnswersFailure);
+      getallAnswers(questionId, answers, that.allAnswersSuccess, that.allAnswersFailure);
     });
   },
 
-  allAnswersSuccess: function(data) {
+  allAnswersSuccess: function(data, answers) {
     for(var i=0; i< data.length; i++) {
       var answer = data[i];
       var answerId = answer.id;
