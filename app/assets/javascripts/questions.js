@@ -5,6 +5,8 @@ $(document).ready(function() {
   var appView = new AppView();
   var questionsModel = new QuestionsModel();
   var questionModel = new QuestionModel();
+  var answersView = new AnswersView();
+  var answersModel = new AnswersModel();
 
   questionView.newQuestionDiv();
 
@@ -18,27 +20,29 @@ $(document).ready(function() {
 
   questionView.deleteQuestionEventHandler(questionModel.deleteQuestion);
 
-  $('#dbc_stack').on('click', '.answers-button', function(e) {
-    e.preventDefault();
-    var question = $(e.target).parent().parent();
-    var questionId = question.data('question-id');
-    var answers = question.find('.answers-go-here');
-    $.ajax({
-      url: "/questions/"+questionId+"/answers",
-      type: "GET",
-      success: function(data) {
-        for(var i=0; i< data.length; i++) {
-          var answer = data[i];
-          var answerId = answer.id;
-          var answerDiv = '<div class="question-answers" data-answer-id="'+answerId+'">'+answer.content+' - '+answer.user_name+' <a class="answer-delete-button" href="">Delete</a>'+'</div>'
-          answers.append(answerDiv);
-        }
-      },
-      failure: function() {
-        alert("Your request was not successful. Please try again.")
-      }
-    })
-  });
+  answersView.allQuestionAnswersEventHandler(answersModel.getAllAnswers);
+
+  // $('#dbc_stack').on('click', '.answers-button', function(e) {
+  //   e.preventDefault();
+  //   var question = $(e.target).parent().parent();
+  //   var questionId = question.data('question-id');
+  //   var answers = question.find('.answers-go-here');
+  //   $.ajax({
+  //     url: "/questions/"+questionId+"/answers",
+  //     type: "GET",
+  //     success: function(data) {
+  //       for(var i=0; i< data.length; i++) {
+  //         var answer = data[i];
+  //         var answerId = answer.id;
+  //         var answerDiv = '<div class="question-answers" data-answer-id="'+answerId+'">'+answer.content+' - '+answer.user_name+' <a class="answer-delete-button" href="">Delete</a>'+'</div>'
+  //         answers.append(answerDiv);
+  //       }
+  //     },
+  //     failure: function() {
+  //       alert("Your request was not successful. Please try again.")
+  //     }
+  //   })
+  // });
 
   $('#dbc_stack').on('click', '.create-answer-button', function(e) {
     e.preventDefault();
