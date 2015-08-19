@@ -12,12 +12,13 @@ QuestionView.prototype = {
     var newQuestionForm = question.find('.new-question-form').show();
   });
   },
-  askQuestionSubmitEventHandler: function(e, newQuestionFunction) {
+  askQuestionSubmitEventHandler: function(newQuestionFunction) {
+    var that = this;
     $('#ask_question').on('submit', '.new-question-form', function(e) {
       e.preventDefault();
       var questionElement = $(e.target)
       questionElement.parent().find('.questions-go-here');
-      newQuestionFunction(questionElement, this.askQuestion, this.askQuestionFailure)
+      newQuestionFunction(questionElement, that.askQuestion, that.askQuestionFailure)
     });
   },
   askQuestion: function(data, questionElement) {
