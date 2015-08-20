@@ -22,22 +22,6 @@ $(document).ready(function() {
 
   questionView.deleteQuestionEventHandler(questionModel.deleteQuestion);
 
-  // $('#dbc_stack').on('click', '.delete-button', function(e) {
-  //   e.preventDefault();
-  //   var question = $(e.target).parent();
-  //   var questionId = question.data('question-id');
-  //   $.ajax({
-  //     url: "/questions/"+questionId,
-  //     type: "DELETE",
-  //     success: function() {
-  //       question.hide();
-  //     },
-  //     failure: function() {
-  //       alert("Your request was not successful. Please try again.")
-  //     }
-  //   })
-  // });
-
   answersView.allQuestionAnswersEventHandler(answersModel.getAllAnswers);
 
   answerView.newAnswerButtonEventHandler();
