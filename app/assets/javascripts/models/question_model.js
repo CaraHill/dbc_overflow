@@ -14,12 +14,12 @@ QuestionModel.prototype = {
       }
     });
   },
-  deleteQuestion: function(questionElement, questionId, success, failure) {
+  deleteQuestion: function(questionId, success, failure) {
     $.ajax({
       url: "/questions/"+questionId,
       type: "DELETE",
-      success: function(questionElement) {
-        success(questionElement);
+      success: function(questionId) {
+        success(questionId);
       },
       failure: function() {
         failure();

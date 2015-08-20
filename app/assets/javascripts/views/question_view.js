@@ -38,11 +38,12 @@ QuestionView.prototype = {
       e.preventDefault();
       var question = $(e.target).parent();
       var questionId = question.data('question-id');
-      deleteQuestion(question, questionId, that.deleteQuestionSuccess, that.deleteQuestionFailure);
+      deleteQuestion(questionId, that.deleteQuestionSuccess, that.deleteQuestionFailure);
     });
   },
-  deleteQuestionSuccess: function(question) {
-    question.hide();
+  deleteQuestionSuccess: function(questionId) {
+    $('.question').find('data[question-id="'+questionId+'"]').hide();
+    // question.hide();
   },
   deleteQuestionFailure: function() {
     alert("Your request was not successful. Please try again.")
