@@ -20,32 +20,29 @@ $(document).ready(function() {
 
   questionView.askQuestionSubmitEventHandler(questionModel.newQuestion);
 
-  questionView.deleteQuestionEventHandler(questionModel.deleteQuestion);
+  // questionView.deleteQuestionEventHandler(questionModel.deleteQuestion);
+
+  $('#dbc_stack').on('click', '.delete-button', function(e) {
+    e.preventDefault();
+    var question = $(e.target).parent();
+    var questionId = question.data('question-id');
+    $.ajax({
+      url: "/questions/"+questionId,
+      type: "DELETE",
+      success: function() {
+        question.hide();
+      },
+      failure: function() {
+        alert("Your request was not successful. Please try again.")
+      }
+    })
+  });
 
   answersView.allQuestionAnswersEventHandler(answersModel.getAllAnswers);
 
   answerView.newAnswerButtonEventHandler();
 
   answerView.newAnswerSubmitEventHandler(answerModel.addNewAnswer);
-
-  // $('#dbc_stack').on('submit', '.new-answer-form', function(e) {
-  //   e.preventDefault();
-  //   var question = $(e.target).parent().parent();
-  //   var questionId = question.data('question-id');
-  //   var newAnswer = question.find('.answers-go-here');
-  //   $.ajax({
-  //     url: "/questions/"+questionId+"/answers",
-  //     type: "POST",
-  //     data: $(e.target).serialize(),
-  //     success: function() {
-  //       alert("Success! Your answer was added.");
-  //       $(e.target).find('input[type=text]').val("")
-  //     },
-  //     failure: function() {
-  //       alert("Your request was not successful. Please try again.")
-  //     }
-  //   })
-  // });
 
   $('#dbc_stack').on('click', '.answer-delete-button', function(e) {
     e.preventDefault();
@@ -124,21 +121,6 @@ $(document).ready(function() {
 //         }
 //     });
 
-//   $('#dbc_stack').on('click', '.delete-button', function(e) {
-//     e.preventDefault();
-//     var question = $(e.target).parent();
-//     var questionId = question.data('question-id');
-//     $.ajax({
-//       url: "/questions/"+questionId,
-//       type: "DELETE",
-//       success: function() {
-//         question.hide();
-//       },
-//       failure: function() {
-//         alert("Your request was not successful. Please try again.")
-//       }
-//     })
-//   });
 
 //   $('#dbc_stack').on('click', '.answers-button', function(e) {
 //     e.preventDefault();
