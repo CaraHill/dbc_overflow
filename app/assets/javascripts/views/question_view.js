@@ -41,9 +41,9 @@ QuestionView.prototype = {
       deleteQuestion(questionId, that.deleteQuestionSuccess, that.deleteQuestionFailure);
     });
   },
-  deleteQuestionSuccess: function(questionId) {
-    $('.question').find('data[question-id="'+questionId+'"]').hide();
-    // question.hide();
+  deleteQuestionSuccess: function(question) {
+    // $('.question').find('data[question-id="'+questionId+'"]').hide();
+    question.hide();
   },
   deleteQuestionFailure: function() {
     alert("Your request was not successful. Please try again.")
