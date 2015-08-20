@@ -32,15 +32,16 @@ QuestionView.prototype = {
   askQuestionFailure: function() {
     alert("Your request was not successful. Please try again.")
   },
-  deleteQuestionEventHandler: function(request) {
+  deleteQuestionEventHandler: function(deleteQuestion) {
+    var that = this;
     $('#dbc_stack').on('click', '.delete-button', function(e) {
-    e.preventDefault();
-    var question = $(e.target).parent();
-    var questionId = question.data('question-id');
-    request(question, questionId, this.deleteQuestion, this.deleteQuestionFailure);
-    }).bind(this);
+      e.preventDefault();
+      var question = $(e.target).parent();
+      var questionId = question.data('question-id');
+      deleteQuestion(question, questionId, that.deleteQuestionSuccess, that.deleteQuestionFailure);
+    });
   },
-  deleteQuestion: function(question) {
+  deleteQuestionSuccess: function(question) {
     question.hide();
   },
   deleteQuestionFailure: function() {

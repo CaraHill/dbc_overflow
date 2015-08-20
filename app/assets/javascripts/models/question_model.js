@@ -18,7 +18,7 @@ QuestionModel.prototype = {
     $.ajax({
       url: "/questions/"+questionId,
       type: "DELETE",
-      success: function() {
+      success: function(questionElement) {
         success(questionElement);
       },
       failure: function() {
