@@ -24,7 +24,7 @@ QuestionView.prototype = {
   askQuestionSuccess: function(data, questionElement) {
     var question = data.question
     var questionId = question.id
-    var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+'</div>'
+    var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' <a class="show-question" href="">Show</a> '+'</div>'
     $('#dbc_stack').append(questionDiv);
     alert("Success! Your question was added.");
     questionElement.find('input[type=text]').val("")
@@ -32,6 +32,16 @@ QuestionView.prototype = {
   askQuestionFailure: function() {
     alert("Your request was not successful. Please try again.")
   },
+
+  showQuestionEventHandler: function() {
+    var that = this;
+    $('#dbc_stack').on('click', '.show-question', function() {
+      e.preventDefault();
+      var question = $(e.target);
+      console.log(question);
+    });
+  },
+
   deleteQuestionEventHandler: function(deleteQuestion) {
     var that = this;
     $('#dbc_stack').on('click', '.delete-button', function(e) {

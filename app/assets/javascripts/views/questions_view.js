@@ -7,7 +7,7 @@ QuestionsView.prototype = {
         var question = data[i]
         var questionId = question.id
         var questionDiv =
-        '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' </div>'
+        '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' <a class="show-question" href="">Show</a> '+'</div>'
         $('#dbc_stack').append(questionDiv);
       }
   },
