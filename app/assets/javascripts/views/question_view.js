@@ -18,13 +18,13 @@ QuestionView.prototype = {
       e.preventDefault();
       var questionElement = $(e.target)
       questionElement.parent().find('.questions-go-here');
-      newQuestionFunction(questionElement, that.askQuestion, that.askQuestionFailure)
+      newQuestionFunction(questionElement, that.askQuestionSuccess, that.askQuestionFailure)
     });
   },
-  askQuestion: function(data, questionElement) {
+  askQuestionSuccess: function(data, questionElement) {
     var question = data.question
     var questionId = question.id
-    var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<a class="create-answer-button" href="">Answer this Question</a> '+'<form class="new-answer-form" method="post" action="/questions/"'+questionId+'"/answer"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+'<a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
+    var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+'</div>'
     $('#dbc_stack').append(questionDiv);
     alert("Success! Your question was added.");
     questionElement.find('input[type=text]').val("")

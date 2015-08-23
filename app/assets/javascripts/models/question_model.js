@@ -1,16 +1,16 @@
 function QuestionModel() {}
 
 QuestionModel.prototype = {
-  newQuestion: function(questionElement, success, failure) {
+  newQuestion: function(questionElement, askQuestionSuccess, askQuestionFailure) {
     $.ajax({
       url: "/questions",
       type: "POST",
       data: questionElement.serialize(),
       success: function(data) {
-        success(data, questionElement);
+        askQuestionSuccess(data, questionElement);
       },
       failure: function() {
-        failure();
+        askQuestionFailure();
       }
     });
   },
