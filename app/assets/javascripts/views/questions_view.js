@@ -1,7 +1,6 @@
 function QuestionsView () {}
 
 QuestionsView.prototype = {
-
   allQuestionsSuccess: function(data) {
     for(var i=0; i< data.length; i++) {
         var question = data[i]
@@ -13,5 +12,10 @@ QuestionsView.prototype = {
   },
   allQuestionsFailure: function() {
     alert("Your request was not successful. Please try again.")
-  }
+  },
+
+  allQuestionsDiv: function() {
+    var allQuestionsDiv ='<div class="all-questions"><a class="all-questions-button" href="">See All Questions</a>'+'</div>';
+    $('#all_questions').append(allQuestionsDiv);
+  },
 }

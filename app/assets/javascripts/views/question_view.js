@@ -5,6 +5,9 @@ QuestionView.prototype = {
     var newQuestionDiv ='<div class="new-question"><a class="ask-question-button" href="">Ask Question</a>'+'<form class="new-question-form" method="post" action="/questions"><input type="text" name="question[content]" placeholder="Ask a Question"><input type="submit" value="Submit Question"></form>'+'<div class="questions-go-here"></div>'+'</div>';
     $('#ask_question').append(newQuestionDiv);
   },
+  hideQuestionDiv: function() {
+    $('#ask_question').hide();
+  },
   askQuestionButtonEventHandler: function() {
     $('#ask_question').on('click', '.ask-question-button', function(e) {
     e.preventDefault();
@@ -33,14 +36,14 @@ QuestionView.prototype = {
     alert("Your request was not successful. Please try again.")
   },
 
-  showQuestionEventHandler: function() {
-    var that = this;
-    $('#dbc_stack').on('click', '.show-question', function() {
-      e.preventDefault();
-      var question = $(e.target);
-      console.log(question);
-    });
-  },
+  // showQuestionEventHandler: function() {
+  //   var that = this;
+  //   $('#dbc_stack').on('click', '.show-question', function() {
+  //     e.preventDefault();
+  //     var question = $(e.target);
+  //     console.log(question);
+  //   });
+  // },
 
   deleteQuestionEventHandler: function(deleteQuestion) {
     var that = this;
