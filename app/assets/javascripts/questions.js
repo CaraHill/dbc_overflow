@@ -16,7 +16,7 @@ $(document).ready(function() {
 
   appView.authenticationErrorAlert();
 
-  questionsModel.getAllQuestions(questionsView.allQuestions, questionsView.allQuestionsFailure);
+  questionsModel.getAllQuestions(questionsView.allQuestionsSuccess, questionsView.allQuestionsFailure);
 
   questionView.askQuestionSubmitEventHandler(questionModel.newQuestion);
 

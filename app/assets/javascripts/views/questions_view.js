@@ -2,7 +2,7 @@ function QuestionsView () {}
 
 QuestionsView.prototype = {
 
-  allQuestions: function(data) {
+  allQuestionsSuccess: function(data) {
     for(var i=0; i< data.length; i++) {
         var question = data[i]
         var questionId = question.id

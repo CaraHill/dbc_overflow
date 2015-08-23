@@ -1,15 +1,15 @@
 function QuestionsModel() {}
 
 QuestionsModel.prototype = {
-  getAllQuestions: function(success, failure) {
+  getAllQuestions: function(allQuestionsSuccess, allQuestionsFailure) {
     $.ajax({
       url: "/questions",
       type: "GET",
       success: function(data) {
-        success(data);
+        allQuestionsSuccess(data);
       },
       failure: function() {
-        failure();
+        allQuestionsFailure();
       }
     });
   }
