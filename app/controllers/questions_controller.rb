@@ -5,6 +5,11 @@ class QuestionsController < ApplicationController
     render json: Question.all
   end
 
+  def show
+    question = Question.find(params[:id])
+    render json: question
+  end
+
   def create
     @question = current_user.questions.build(question_params)
     if @question.save
