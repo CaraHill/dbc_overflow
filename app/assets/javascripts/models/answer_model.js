@@ -13,5 +13,18 @@ AnswerModel.prototype = {
         newAnswerFailure();
       }
     });
+  },
+
+  deleteAnswer: function(questionId, answerId, answer, deleteAnswerSuccess, deleteAnswerFailure) {
+    $.ajax({
+      url: "/questions/"+questionId+"/answers/"+answerId,
+      type: "DELETE",
+      success: function() {
+        deleteAnswerSuccess(answer);
+      },
+      failure: function() {
+        deleteAnswerFailure();
+      }
+    });
   }
 }

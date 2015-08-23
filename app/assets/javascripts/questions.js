@@ -28,23 +28,25 @@ $(document).ready(function() {
 
   answerView.newAnswerSubmitEventHandler(answerModel.addNewAnswer);
 
-  $('#dbc_stack').on('click', '.answer-delete-button', function(e) {
-    e.preventDefault();
-    var question = $(e.target).parent().parent().parent().parent();
-    var questionId = question.data('question-id');
-    var answer = question.find('.question-answers');
-    var answerId = answer.data('answer-id');
-    $.ajax({
-      url: "/questions/"+questionId+"/answers/"+answerId,
-      type: "DELETE",
-      success: function() {
-        answer.hide();
-      },
-      failure: function() {
-        alert("Your request was not successful. Please try again.")
-      }
-    })
-  })
+  answerView.deleteAnswerEventHandler(answerModel.deleteAnswer);
+
+  // $('#dbc_stack').on('click', '.answer-delete-button', function(e) {
+  //   e.preventDefault();
+  //   var question = $(e.target).parent().parent().parent().parent();
+  //   var questionId = question.data('question-id');
+  //   var answer = question.find('.question-answers');
+  //   var answerId = answer.data('answer-id');
+  //   $.ajax({
+  //     url: "/questions/"+questionId+"/answers/"+answerId,
+  //     type: "DELETE",
+  //     success: function() {
+  //       answer.hide();
+  //     },
+  //     failure: function() {
+  //       alert("Your request was not successful. Please try again.")
+  //     }
+  //   })
+  // })
 
 })
 

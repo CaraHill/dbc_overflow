@@ -42,7 +42,6 @@ QuestionView.prototype = {
     });
   },
   deleteQuestionSuccess: function(question) {
-    // $('.question').find('data[question-id="'+questionId+'"]').hide();
     question.hide();
   },
   deleteQuestionFailure: function() {

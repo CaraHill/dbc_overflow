@@ -29,5 +29,24 @@ AnswerView.prototype = {
 
   newAnswerFailure: function() {
     alert("Your request was not successful. Please try again.");
+  },
+
+  deleteAnswerEventHandler: function(deleteAnswer) {
+    var that = this;
+    $('#dbc_stack').on('click', '.answer-delete-button', function(e) {
+      e.preventDefault();
+      var question = $(e.target).parent().parent().parent().parent();
+      var questionId = question.data('question-id');
+      var answer = question.find('.question-answers');
+      var answerId = answer.data('answer-id');
+      deleteAnswer(questionId, answerId, answer, that.deleteAnswerSuccess, that.deleteAnswerFailure);
+    });
+  },
+
+  deleteAnswerSuccess: function(answer) {
+    answer.hide();
+  },
+  deleteAnswerFailure: function() {
+    alert("Your request was not successful. Please try again.");
   }
 }
