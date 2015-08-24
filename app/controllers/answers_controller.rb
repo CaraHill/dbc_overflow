@@ -2,8 +2,8 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
 
   def index
-    question = Question.find(params[:question_id])
-    render json: question.answers
+    # question = Question.find(params[:question_id])
+    # render json: question.answers
   end
 
   def create
