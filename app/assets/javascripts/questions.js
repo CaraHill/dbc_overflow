@@ -18,11 +18,12 @@ $(document).ready(function() {
 
   questionsModel.getAllQuestions(questionsView.allQuestionsSuccess, questionsView.allQuestionsFailure);
 
+  //questionView.showQuestionEventHandler(questionModel.showQuestion, questionsView.allQuestionsDiv);
+
   $('#dbc_stack').on('click', '.show-question', function(e) {
     e.preventDefault();
     var question = $(e.target).parent();
     var questionId = question.data('question-id');
-    console.log(questionId);
     $.ajax({
       url: "/questions/"+questionId,
       type: "GET",

@@ -36,14 +36,29 @@ QuestionView.prototype = {
     alert("Your request was not successful. Please try again.")
   },
 
-  // showQuestionEventHandler: function() {
-  //   var that = this;
-  //   $('#dbc_stack').on('click', '.show-question', function() {
-  //     e.preventDefault();
-  //     var question = $(e.target);
-  //     console.log(question);
-  //   });
-  // },
+  showQuestionEventHandler: function(showQuestion, allQuestionsDiv) {
+    var that = this;
+    $('#dbc_stack').on('click', '.show-question', function(e) {
+      e.preventDefault();
+      var question = $(e.target).parent();
+      var questionId = question.data('question-id');
+      showQuestion(questionId, that.showQuestionSuccess, that.showQuestionFailure, that.hideQuestionDiv, allQuestionsDiv)
+    });
+  },
+
+  showQuestionSuccess: function(data, questionId, hideQuestionDiv, allQuestionsDiv) {
+    var question = data;
+    var questionId = question.id
+    var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<div class="new-answer"><a class="create-answer-button" href="">Answer this Question</a>'+'<form class="new-answer-form" method="post" action="/questions/'+questionId+'/answers"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+' <a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
+    $('#dbc_stack').empty();
+    $('#dbc_stack').append(questionDiv);
+    that.hideQuestionDiv;
+    allQuestionsDiv;
+  },
+
+  showQuestionFailure: function() {
+    alert("Your request was not successful. Please try again.");
+  },
 
   deleteQuestionEventHandler: function(deleteQuestion) {
     var that = this;

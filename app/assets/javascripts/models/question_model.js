@@ -14,6 +14,18 @@ QuestionModel.prototype = {
       }
     });
   },
+  showQuestion: function(questionId, hideQuestionDiv, allQuestionsDiv, showQuestionSuccess, showQuestionFailure) {
+    $.ajax({
+      url: "/questions/"+questionId,
+      type: "GET",
+      success: function(data) {
+        showQuestionSuccess(data, hideQuestionDiv, allQuestionsDiv);
+      },
+      failure: function() {
+        showQuestionFailure();
+      }
+    });
+  },
   deleteQuestion: function(question, questionId, success, failure) {
     $.ajax({
       url: "/questions/"+questionId,
