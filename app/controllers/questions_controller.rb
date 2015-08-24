@@ -26,11 +26,17 @@ class QuestionsController < ApplicationController
 
   def remove
     question = Question.find(params[:id])
-    Answer.where(question_id: question.id).destroy_all
-    if question.destroy
-      render status: 200, json: {
-        message: "Your request was successful."
-      }
+    if current_user.id == question.user_id
+      Answer.where(question_id: question.id).destroy_all
+      if question.destroy
+        render status: 200, json: {
+          message: "Your request was successful."
+        }
+      else
+        render status: 400, json: {
+          message: "Your request was not successful. Please try again."
+        }
+      end
     else
       render status: 400, json: {
         message: "Your request was not successful. Please try again."
