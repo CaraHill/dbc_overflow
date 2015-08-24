@@ -18,7 +18,7 @@ $(document).ready(function() {
 
   questionsModel.getAllQuestions(questionsView.allQuestionsSuccess, questionsView.allQuestionsFailure);
 
-  //questionView.showQuestionEventHandler(questionModel.showQuestion, questionsView.allQuestionsDiv);
+  // questionView.showQuestionEventHandler(questionModel.showQuestion, questionsView.allQuestionsDiv);
 
   $('#dbc_stack').on('click', '.show-question', function(e) {
     e.preventDefault();

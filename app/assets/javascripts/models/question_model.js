@@ -14,7 +14,7 @@ QuestionModel.prototype = {
       }
     });
   },
-  showQuestion: function(questionId, hideQuestionDiv, allQuestionsDiv, showQuestionSuccess, showQuestionFailure) {
+  showQuestion: function(questionId, showQuestionSuccess, showQuestionFailure, hideQuestionDiv, allQuestionsDiv) {
     $.ajax({
       url: "/questions/"+questionId,
       type: "GET",
