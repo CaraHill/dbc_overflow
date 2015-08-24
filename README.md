@@ -14,6 +14,7 @@ MVP:
 
 Stretch:
 - Respond to both questions and answers (authenticated)(responses are a flat list)
+- Vote on answers and questions (authenticated)
 
 App Generation
 ------------
