@@ -7,7 +7,11 @@ class QuestionsController < ApplicationController
 
   def show
     question = Question.find(params[:id])
-    render json: question
+    answers = question.answers
+    render json: {
+      question: question,
+      answer: answers
+    }
   end
 
   def create
