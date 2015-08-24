@@ -21,7 +21,7 @@ QuestionView.prototype = {
       e.preventDefault();
       var questionElement = $(e.target)
       questionElement.parent().find('.questions-go-here');
-      newQuestionFunction(questionElement, that.askQuestionSuccess, that.askQuestionFailure)
+      newQuestionFunction(questionElement, that.askQuestionSuccess, that.askQuestionError)
     });
   },
   askQuestionSuccess: function(data, questionElement) {
@@ -32,7 +32,7 @@ QuestionView.prototype = {
     alert("Success! Your question was added.");
     questionElement.find('input[type=text]').val("")
   },
-  askQuestionFailure: function() {
+  askQuestionError: function() {
     alert("Your request was not successful. Please try again.")
   },
 
@@ -42,7 +42,7 @@ QuestionView.prototype = {
       e.preventDefault();
       var question = $(e.target).parent();
       var questionId = question.data('question-id');
-      showQuestion(questionId, that.showQuestionSuccess, that.showQuestionFailure, that.hideQuestionDiv, allQuestionsDiv)
+      showQuestion(questionId, that.showQuestionSuccess, that.showQuestionError, that.hideQuestionDiv, allQuestionsDiv)
     });
   },
 
@@ -56,7 +56,7 @@ QuestionView.prototype = {
     QuestionsView.allQuestionsDiv;
   },
 
-  showQuestionFailure: function() {
+  showQuestionError: function() {
     alert("Your request was not successful. Please try again.");
   },
 
@@ -66,13 +66,13 @@ QuestionView.prototype = {
       e.preventDefault();
       var question = $(e.target).parent();
       var questionId = question.data('question-id');
-      deleteQuestion(question, questionId, that.deleteQuestionSuccess, that.deleteQuestionFailure);
+      deleteQuestion(question, questionId, that.deleteQuestionSuccess, that.deleteQuestionError);
     });
   },
   deleteQuestionSuccess: function(question) {
     question.hide();
   },
-  deleteQuestionFailure: function() {
-    alert("Your request was not successful. Please try again.")
+  deleteQuestionError: function() {
+    alert("You do not have permission to do that.")
   }
 }

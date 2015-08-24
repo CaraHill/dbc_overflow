@@ -1,7 +1,7 @@
 function QuestionModel() {}
 
 QuestionModel.prototype = {
-  newQuestion: function(questionElement, askQuestionSuccess, askQuestionFailure) {
+  newQuestion: function(questionElement, askQuestionSuccess, askQuestionError) {
     $.ajax({
       url: "/questions",
       type: "POST",
@@ -9,32 +9,32 @@ QuestionModel.prototype = {
       success: function(data) {
         askQuestionSuccess(data, questionElement);
       },
-      failure: function() {
-        askQuestionFailure();
+      error: function() {
+        askQuestionerror();
       }
     });
   },
-  showQuestion: function(questionId, showQuestionSuccess, showQuestionFailure, hideQuestionDiv, allQuestionsDiv) {
+  showQuestion: function(questionId, showQuestionSuccess, showQuestionError, hideQuestionDiv, allQuestionsDiv) {
     $.ajax({
       url: "/questions/"+questionId,
       type: "GET",
       success: function(data) {
         showQuestionSuccess(data, hideQuestionDiv, allQuestionsDiv);
       },
-      failure: function() {
-        showQuestionFailure();
+      error: function() {
+        showQuestionerror();
       }
     });
   },
-  deleteQuestion: function(question, questionId, success, failure) {
+  deleteQuestion: function(question, questionId, success, error) {
     $.ajax({
       url: "/questions/"+questionId,
       type: "DELETE",
       success: function() {
         success(question);
       },
-      failure: function() {
-        failure();
+      error: function() {
+        error();
       }
     });
   }
