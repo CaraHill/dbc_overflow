@@ -16,7 +16,7 @@ $(document).ready(function() {
 
   appView.authenticationErrorAlert();
 
-  questionsModel.getAllQuestions(questionsView.allQuestionsSuccess, questionsView.allQuestionsFailure);
+  questionsModel.getAllQuestions(questionsView.allQuestionsSuccess, questionsView.allQuestionsError);
 
   // questionView.showQuestionEventHandler(questionModel.showQuestion, questionsView.allQuestionsDiv);
 
@@ -36,7 +36,7 @@ $(document).ready(function() {
         questionView.hideQuestionDiv();
         questionsView.allQuestionsDiv();
       },
-      failure: function() {
+      error: function() {
         alert("Your request was not successful. Please try again.");
       }
     });

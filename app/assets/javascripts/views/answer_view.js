@@ -18,7 +18,7 @@ AnswerView.prototype = {
       var question = $(e.target).parent().parent();
       var questionId = question.data('question-id');
       question.find('.answers-go-here');
-      addNewAnswer(e, questionId, that.newAnswerSuccess, that.newAnswerFailure);
+      addNewAnswer(e, questionId, that.newAnswerSuccess, that.newAnswerError);
     });
   },
 
@@ -27,7 +27,7 @@ AnswerView.prototype = {
     $('.new-answer-form').find('input[type=text]').val("");
   },
 
-  newAnswerFailure: function() {
+  newAnswerError: function() {
     alert("Your request was not successful. Please try again.");
   },
 
@@ -39,14 +39,14 @@ AnswerView.prototype = {
       var questionId = question.data('question-id');
       var answer = question.find('.question-answers');
       var answerId = answer.data('answer-id');
-      deleteAnswer(questionId, answerId, answer, that.deleteAnswerSuccess, that.deleteAnswerFailure);
+      deleteAnswer(questionId, answerId, answer, that.deleteAnswerSuccess, that.deleteAnswerError);
     });
   },
 
   deleteAnswerSuccess: function(answer) {
     answer.hide();
   },
-  deleteAnswerFailure: function() {
-    alert("Your request was not successful. Please try again.");
+  deleteAnswerError: function() {
+    alert("You do not have permission to do that.");
   }
 }

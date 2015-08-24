@@ -9,7 +9,7 @@ AnswersView.prototype  =  {
       var question = $(e.target).parent().parent();
       var questionId = question.data('question-id');
       var answers = question.find('.answers-go-here');
-      getallAnswers(questionId, answers, that.allAnswersSuccess, that.allAnswersFailure);
+      getallAnswers(questionId, answers, that.allAnswersSuccess, that.allAnswersError);
     });
   },
 
@@ -22,7 +22,7 @@ AnswersView.prototype  =  {
     }
   },
 
-  allAnswersFailure: function() {
+  allAnswersError: function() {
     alert("Your request was not successful. Please try again.")
   }
 }

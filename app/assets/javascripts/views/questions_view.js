@@ -10,7 +10,7 @@ QuestionsView.prototype = {
         $('#dbc_stack').append(questionDiv);
       }
   },
-  allQuestionsFailure: function() {
+  allQuestionsError: function() {
     alert("Your request was not successful. Please try again.")
   },
 
