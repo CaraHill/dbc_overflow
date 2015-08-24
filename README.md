@@ -13,8 +13,8 @@ MVP:
 - View questions and answers (authenticated or not)
 
 Stretch:
-- Respond to both questions and answers (authenticated)(responses are a flat list)
 - Vote on answers and questions (authenticated)
+- Respond to both questions and answers (authenticated)(responses are a flat list)
 
 App Generation
 ------------
