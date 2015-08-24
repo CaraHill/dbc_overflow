@@ -23,10 +23,16 @@ class AnswersController < ApplicationController
   def destroy
     question = Question.find(params[:question_id])
     answer = question.answers.find(params[:id])
-    if answer.destroy
-      render status: 200, json: {
-        message: "Your request was successful."
-      }
+    if current_user.id == answer.user_id
+      if answer.destroy
+        render status: 200, json: {
+          message: "Your request was successful."
+        }
+      else
+        render status: 400, json: {
+          message: "Your request was not successful. Please try again."
+        }
+      end
     else
       render status: 400, json: {
         message: "Your request was not successful. Please try again."
