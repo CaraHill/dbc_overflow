@@ -28,11 +28,19 @@ $(document).ready(function() {
       url: "/questions/"+questionId,
       type: "GET",
       success: function(data) {
-        var question = data;
+        var question = data.question;
         var questionId = question.id
-        var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<div class="new-answer"><a class="create-answer-button" href="">Answer this Question</a>'+'<form class="new-answer-form" method="post" action="/questions/'+questionId+'/answers"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+' <a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
+        var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<div class="new-answer"><a class="create-answer-button" href="">Answer this Question</a>'+'<form class="new-answer-form" method="post" action="/questions/'+questionId+'/answers"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+'<div class="answers-go-here"></div>'+'</div>'
         $('#dbc_stack').empty();
         $('#dbc_stack').append(questionDiv);
+        var answersDiv = $('#dbc_stack').find('.answers-go-here');
+        var answers = data.answer
+        for(var i=0; i< answers.length; i++) {
+          var answer = answers[i];
+          var answerId = answer.id;
+          var answerDiv = '<div class="question-answers" data-answer-id="'+answerId+'">'+answer.content+' - '+answer.user_name+' <a class="answer-delete-button" href="">Delete</a>'+'</div>'
+          answersDiv.append(answerDiv);
+        }
         questionView.hideQuestionDiv();
         questionsView.allQuestionsDiv();
       },
