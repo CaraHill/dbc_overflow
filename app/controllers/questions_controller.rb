@@ -38,6 +38,7 @@ class QuestionsController < ApplicationController
         }
       end
     else
+      flash.now[:alert] = "You do not have permission to do that."
       render status: 400, json: {
         message: "Your request was not successful. Please try again."
       }
