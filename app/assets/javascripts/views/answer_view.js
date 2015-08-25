@@ -16,6 +16,7 @@ AnswerView.prototype = {
     $('#dbc_stack').on('submit', '.new-answer-form', function(e) {
       e.preventDefault();
       var question = $(e.target).parent().parent();
+      console.log(question)
       var questionId = question.data('question-id');
       question.find('.answers-go-here');
       addNewAnswer(e, questionId, that.newAnswerSuccess, that.newAnswerError);
@@ -25,6 +26,7 @@ AnswerView.prototype = {
   newAnswerSuccess: function() {
     alert("Success! Your answer was added.");
     $('.new-answer-form').find('input[type=text]').val("");
+    $('.answers-go-here').hide().show().fadeIn('fast');
   },
 
   newAnswerError: function() {
@@ -45,6 +47,7 @@ AnswerView.prototype = {
 
   deleteAnswerSuccess: function(answer) {
     answer.hide();
+    $('.answers-go-here').hide().show().fadeIn('fast');
   },
   deleteAnswerError: function() {
     alert("You do not have permission to do that.");
