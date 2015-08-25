@@ -16,9 +16,8 @@ AnswerView.prototype = {
     $('#dbc_stack').on('submit', '.new-answer-form', function(e) {
       e.preventDefault();
       var question = $(e.target).parent().parent();
-      console.log(question)
       var questionId = question.data('question-id');
-      question.find('.answers-go-here');
+      // var answerDiv = question.find('.answers-go-here');
       addNewAnswer(e, questionId, that.newAnswerSuccess, that.newAnswerError);
     });
   },
@@ -37,9 +36,10 @@ AnswerView.prototype = {
     var that = this;
     $('#dbc_stack').on('click', '.answer-delete-button', function(e) {
       e.preventDefault();
-      var question = $(e.target).parent().parent().parent().parent();
+      var $element = $(e.target);
+      var question = $element.parent().parent().parent().parent();
       var questionId = question.data('question-id');
-      var answer = question.find('.question-answers');
+      var answer = $element.parent();
       var answerId = answer.data('answer-id');
       deleteAnswer(questionId, answerId, answer, that.deleteAnswerSuccess, that.deleteAnswerError);
     });
@@ -47,7 +47,6 @@ AnswerView.prototype = {
 
   deleteAnswerSuccess: function(answer) {
     answer.hide();
-    $('.answers-go-here').hide().show().fadeIn('fast');
   },
   deleteAnswerError: function() {
     alert("You do not have permission to do that.");
