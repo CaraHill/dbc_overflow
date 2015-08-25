@@ -15,6 +15,7 @@ MVP:
 Stretch:
 - Vote on answers and questions (authenticated)
 - Respond to both questions and answers (authenticated)(responses are a flat list)
+- Limit the number of questions that appear on the home page - top 10?
 
 App Generation
 ------------
