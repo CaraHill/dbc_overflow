@@ -28,7 +28,6 @@ AnswerView.prototype = {
     $('.answers-go-here').append(answerDiv);
     alert("Success! Your answer was added.");
     $('.new-answer-form').find('input[type=text]').val("");
-    $('.answers-go-here').hide().show().fadeIn('fast');
   },
 
   newAnswerError: function() {
