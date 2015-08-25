@@ -11,7 +11,7 @@ QuestionView.prototype = {
   askQuestionButtonEventHandler: function() {
     $('#ask_question').on('click', '.ask-question-button', function(e) {
     e.preventDefault();
-    var question = $(e.target).parent();
+    var question = $(e.target).parents('#ask_question');
     var newQuestionForm = question.find('.new-question-form').show();
   });
   },
@@ -40,7 +40,7 @@ QuestionView.prototype = {
     var that = this;
     $('#dbc_stack').on('click', '.show-question', function(e) {
       e.preventDefault();
-      var question = $(e.target).parent();
+      var question = $(e.target).parents('.question');
       var questionId = question.data('question-id');
       showQuestion(questionId, that.showQuestionSuccess, that.showQuestionError, that.hideQuestionDiv, allQuestionsDiv)
     });
@@ -64,7 +64,7 @@ QuestionView.prototype = {
     var that = this;
     $('#dbc_stack').on('click', '.delete-button', function(e) {
       e.preventDefault();
-      var question = $(e.target).parent();
+      var question = $(e.target).parents('.question');
       var questionId = question.data('question-id');
       deleteQuestion(question, questionId, that.deleteQuestionSuccess, that.deleteQuestionError);
     });

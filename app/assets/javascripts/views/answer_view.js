@@ -6,7 +6,7 @@ AnswerView.prototype = {
   newAnswerButtonEventHandler: function() {
     $('#dbc_stack').on('click', '.create-answer-button', function(e) {
       e.preventDefault();
-      var question = $(e.target).parent();
+      var question = $(e.target).parents('.question');
       question.find('.new-answer-form').show();
     });
   },
@@ -15,7 +15,7 @@ AnswerView.prototype = {
     var that = this;
     $('#dbc_stack').on('submit', '.new-answer-form', function(e) {
       e.preventDefault();
-      var question = $(e.target).parent().parent();
+      var question = $(e.target).parents('.question');
       var questionId = question.data('question-id');
       // var answerDiv = question.find('.answers-go-here');
       addNewAnswer(e, questionId, that.newAnswerSuccess, that.newAnswerError);

@@ -20,7 +20,7 @@ $(document).ready(function() {
 
   $('#dbc_stack').on('click', '.show-question', function(e) {
     e.preventDefault();
-    var question = $(e.target).parent();
+    var question = $(e.target).parents('.question');
     var questionId = question.data('question-id');
     $.ajax({
       url: "/questions/"+questionId,
