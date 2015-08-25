@@ -37,7 +37,7 @@ AnswerView.prototype = {
     $('#dbc_stack').on('click', '.answer-delete-button', function(e) {
       e.preventDefault();
       var $element = $(e.target);
-      var question = $element.parent().parent().parent().parent();
+      var question = $element.parents('.question');
       var questionId = question.data('question-id');
       var answer = $element.parent();
       var answerId = answer.data('answer-id');
