@@ -17,12 +17,15 @@ AnswerView.prototype = {
       e.preventDefault();
       var question = $(e.target).parents('.question');
       var questionId = question.data('question-id');
-      // var answerDiv = question.find('.answers-go-here');
       addNewAnswer(e, questionId, that.newAnswerSuccess, that.newAnswerError);
     });
   },
 
-  newAnswerSuccess: function() {
+  newAnswerSuccess: function(data) {
+    var answer = data.answer
+    var answerId = answer.id
+    var answerDiv = '<div class="question-answers" data-question-id="'+answerId+'">'+answer.content+' - '+answer.user_name+' <a class="answer-delete-button" href="">Delete</a> '+'</div>'
+    $('.answers-go-here').append(answerDiv);
     alert("Success! Your answer was added.");
     $('.new-answer-form').find('input[type=text]').val("");
     $('.answers-go-here').hide().show().fadeIn('fast');
