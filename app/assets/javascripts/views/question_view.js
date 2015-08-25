@@ -20,7 +20,6 @@ QuestionView.prototype = {
     $('#ask_question').on('submit', '.new-question-form', function(e) {
       e.preventDefault();
       var questionElement = $(e.target)
-      questionElement.parent().find('.questions-go-here');
       newQuestionFunction(questionElement, that.askQuestionSuccess, that.askQuestionError)
     });
   },
