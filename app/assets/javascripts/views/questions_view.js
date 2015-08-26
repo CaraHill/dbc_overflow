@@ -17,5 +17,6 @@ QuestionsView.prototype = {
   allQuestionsDiv: function() {
     var allQuestionsDiv ='<div class="all-questions"><a class="all-questions-button" href="">See All Questions</a>'+'</div>';
     $('#all_questions').append(allQuestionsDiv);
+    $('#all_questions').hide();
   },
 }

@@ -5,9 +5,9 @@ QuestionView.prototype = {
     var newQuestionDiv ='<div class="new-question"><a class="ask-question-button" href="">Ask Question</a>'+'<form class="new-question-form" method="post" action="/questions"><input type="text" name="question[content]" placeholder="Ask a Question"><input type="submit" value="Submit Question"></form>'+'<div class="questions-go-here"></div>'+'</div>';
     $('#ask_question').append(newQuestionDiv);
   },
-  hideQuestionDiv: function() {
-    $('#ask_question').hide();
-  },
+  // hideQuestionDiv: function() {
+  //   $('#ask_question').hide();
+  // },
   askQuestionButtonEventHandler: function() {
     $('#ask_question').on('click', '.ask-question-button', function(e) {
     e.preventDefault();
@@ -35,20 +35,20 @@ QuestionView.prototype = {
     alert("Your request was not successful. Please try again.")
   },
 
-  showQuestionEventHandler: function(showQuestion, allQuestionsDiv) {
+  showQuestionEventHandler: function(showQuestion) {
     var that = this;
     $('#dbc_stack').on('click', '.show-question', function(e) {
       e.preventDefault();
       var question = $(e.target).parents('.question');
       var questionId = question.data('question-id');
-      showQuestion(questionId, that.showQuestionSuccess, that.showQuestionError, that.hideQuestionDiv, allQuestionsDiv)
+      showQuestion(questionId, that.showQuestionSuccess, that.showQuestionError)
     });
   },
 
-  showQuestionSuccess: function(data, hideQuestionDiv, allQuestionsDiv) {
+  showQuestionSuccess: function(data) {
     var question = data.question;
     var questionId = question.id
-    var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<div class="new-answer"><a class="create-answer-button" href="">Answer this Question</a>'+'<form class="new-answer-form" method="post" action="/questions/'+questionId+'/answers"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+' <a class="answers-button" href="">See Answers</a>'+'<div class="answers-go-here"></div>'+'</div>'
+    var questionDiv = '<div class="question" data-question-id="'+questionId+'">'+question.content+' - '+question.user_name+' <a class="delete-button" href="">Delete</a> '+'<div class="new-answer"><a class="create-answer-button" href="">Answer this Question</a>'+'<form class="new-answer-form" method="post" action="/questions/'+questionId+'/answers"><input type="text" name="answer[content]" placeholder="Answer a Question"><input type="submit" value="Submit Answer"></form>'+'<div class="answers-go-here"></div>'+'</div>'
     $('#dbc_stack').empty();
     $('#dbc_stack').append(questionDiv);
     var answersDiv = $('#dbc_stack').find('.answers-go-here');
@@ -59,8 +59,8 @@ QuestionView.prototype = {
       var answerDiv = '<div class="question-answers" data-answer-id="'+answerId+'">'+answer.content+' - '+answer.user_name+' <a class="answer-delete-button" href="">Delete</a>'+'</div>'
       answersDiv.append(answerDiv);
     }
-    QuestionView.hideQuestionDiv;
-    QuestionsView.allQuestionsDiv;
+    $('#ask_question').hide();
+    $('#all_questions').show();
   },
 
   showQuestionError: function() {

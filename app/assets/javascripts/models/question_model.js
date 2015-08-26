@@ -14,12 +14,12 @@ QuestionModel.prototype = {
       }
     });
   },
-  showQuestion: function(questionId, showQuestionSuccess, showQuestionError, hideQuestionDiv, allQuestionsDiv) {
+  showQuestion: function(questionId, showQuestionSuccess, showQuestionError) {
     $.ajax({
       url: "/questions/"+questionId,
       type: "GET",
       success: function(data) {
-        showQuestionSuccess(data, hideQuestionDiv, allQuestionsDiv);
+        showQuestionSuccess(data);
       },
       error: function() {
         showQuestionerror();
