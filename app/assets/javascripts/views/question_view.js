@@ -8,10 +8,10 @@ QuestionView.prototype = {
 
   askQuestionButtonEventHandler: function() {
     $('#ask_question').on('click', '.ask-question-button', function(e) {
-    e.preventDefault();
-    var question = $(e.target).parents('#ask_question');
-    var newQuestionForm = question.find('.new-question-form').show();
-  });
+      e.preventDefault();
+      var question = $(e.target).parents('#ask_question');
+      var newQuestionForm = question.find('.new-question-form').show();
+    });
   },
   askQuestionSubmitEventHandler: function(newQuestionFunction) {
     var that = this;
@@ -75,6 +75,7 @@ QuestionView.prototype = {
     });
   },
   deleteQuestionSuccess: function(question) {
+    alert("Your question was deleted.");
     question.hide();
   },
   deleteQuestionError: function() {
