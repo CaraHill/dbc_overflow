@@ -30,6 +30,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'json_spec'
+  gem 'jasmine'
 end
 group :test do
   gem 'capybara'
