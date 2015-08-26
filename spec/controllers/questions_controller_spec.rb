@@ -53,7 +53,7 @@ RSpec.describe QuestionsController, :type => :controller do
       expect(json_result["answer"][0]["content"]).to eq(@answer.content)
     end
 
-    it "renders a http status of 200 if successful" do
+    it "renders an http status of 200 if successful" do
       expect(response).to have_http_status(200)
     end
 
@@ -94,7 +94,7 @@ RSpec.describe QuestionsController, :type => :controller do
       expect(Answer.all).to_not include(@answer)
     end
 
-    it "renders a http status of 200 if successful" do
+    it "renders an http status of 200 if successful" do
       expect(response).to have_http_status(200)
     end
   end

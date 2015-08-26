@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :answer do
     content "MyString"
-    user nil
-    question nil
+    user_id nil
+    question_id nil
   end
 end
