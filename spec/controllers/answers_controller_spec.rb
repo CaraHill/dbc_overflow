@@ -18,4 +18,26 @@ RSpec.describe AnswersController, :type => :controller do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "#destroy" do
+    before do
+      @user = FactoryGirl.create(:user)
+      sign_in(@user)
+      @question = Question.create(content: "This is a question", user_id: @user.id)
+      @answer = FactoryGirl.create(:answer, user_id: @user.id, question_id: @question.id)
+      delete :destroy, question_id: @question.id, id: @answer.id
+    end
+
+    it "deletes the answer from the database" do
+      expect(Answer.all).to_not include(@answer)
+    end
+
+    it "only deletes the answer if the current_user is the same as the answer's user" do
+      expect(@user.id).to eq(@answer.user_id)
+    end
+
+    it "renders an http status of 200 if successful" do
+      expect(response).to have_http_status(200)
+    end
+  end
 end
