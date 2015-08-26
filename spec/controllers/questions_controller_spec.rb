@@ -71,7 +71,7 @@ RSpec.describe QuestionsController, :type => :controller do
       expect { post :create, :question => @question_params }.to change(Question, :count).by(1)
     end
 
-    it "renders a http status of 200 if successful" do
+    it "renders an http status of 200 if successful" do
       expect(response).to have_http_status(200)
     end
   end
@@ -82,11 +82,16 @@ RSpec.describe QuestionsController, :type => :controller do
       user = FactoryGirl.create(:user)
       sign_in(user)
       @question = Question.create(content: "Hello!", user_id: user.id)
+      @answer = Answer.create(content: "Goodbye!", question_id: @question.id, user_id: user.id)
       delete :remove, id: @question.id
     end
 
     it "deletes the question" do
       expect(Question.all).to_not include(@question)
+    end
+
+    it "deletes the question's answer" do
+      expect(Answer.all).to_not include(@answer)
     end
 
     it "renders a http status of 200 if successful" do
