@@ -34,6 +34,31 @@ RSpec.describe QuestionsController, :type => :controller do
     end
   end
 
+  describe "#show" do
+
+    before do
+      @user = FactoryGirl.create(:user)
+      @question = Question.create(content: "Is this a question?", user_id: @user.id)
+      @answer = Answer.create(content: "Yes it is!", user_id: @user.id, question_id: @question.id)
+      get :show, id: @question.id
+    end
+
+    it "returns the correct question" do
+      json_result = parse_json(response.body)
+      expect(json_result["question"]["content"]).to eq(@question.content)
+    end
+
+    it "returns the correct answer" do
+      json_result = parse_json(response.body)
+      expect(json_result["answer"][0]["content"]).to eq(@answer.content)
+    end
+
+    it "renders a http status of 200 if successful" do
+      expect(response).to have_http_status(200)
+    end
+
+  end
+
   describe "#create" do
 
     before do
