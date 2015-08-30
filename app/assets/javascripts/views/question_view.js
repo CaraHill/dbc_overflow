@@ -1,3 +1,17 @@
+// I think it might be helpful to explore some sort of templating solution here
+// - as I'm sure you have found, concatenating stings of HTML together isn't
+// the cleanest approach.
+//
+// There are a no. of possible solutions:
+//
+// * the underscore library provides simple templates that could be helpful
+// * mustasche and handlebars are more full featured alternatives.
+//
+// If you would prefer not to use those you can still apply the same pattern
+// they provide i.e. a function that takes an object and returns a string or
+// rendered HTML. These functions should be separated from the functions that
+// know *where* in the DOM this HTML will get inserted.
+//
 function QuestionView() {}
 
 QuestionView.prototype = {

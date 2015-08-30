@@ -8,6 +8,7 @@ $(document).ready(function() {
   var answerView = new AnswerView();
   var answerModel = new AnswerModel();
 
+  // could these activities happen in some sort of onInit() function of the View object?
   questionView.newQuestionDiv();
 
   questionView.askQuestionButtonEventHandler();
