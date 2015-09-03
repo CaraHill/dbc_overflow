@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :remove]
 
   def index
     render json: Question.all
@@ -15,6 +14,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    authenticate_user!
     @question = current_user.questions.build(question_params)
     if @question.save
       render status: 200, json: {
@@ -29,6 +29,7 @@ class QuestionsController < ApplicationController
   end
 
   def remove
+    authenticate_user!
     question = Question.find(params[:id])
 
     # nested if-else is a bit of a code smell. It increases the no. of possible
