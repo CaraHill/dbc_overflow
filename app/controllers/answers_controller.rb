@@ -1,4 +1,26 @@
 class AnswersController < ApplicationController
+  # I'm not a huge fan of these before_action filters combined with :only or
+  # :except. IMHO it makes code harder to read as the entry point for
+  # execution of the response to a HTTP request is no longer the method.
+  #
+  # I think it is clearer to just invoke the filter method at the start of the
+  # method e.g.
+  #
+  # def create
+  #   authenticate_user!
+  #   # ...
+  # end
+  #
+  # It isn't a big deal here as your controller is fairly small but imagine
+  # something like:
+  #
+  #   before_action :foo1 only: [:create, :destroy]
+  #   before_action :foo2 only: [:destroy]
+  #   before_action :foo4 except: [:create, :destroy]
+  #   before_action :foo3 only: [:index]
+  #   before_action :foo5 except: [:index, :destroy]
+  #
+  # It is now quite complex to understand what this controller does.
   before_action :authenticate_user!, only: [:create, :destroy]
 
   def index
