@@ -21,12 +21,12 @@ class AnswersController < ApplicationController
   #   before_action :foo5 except: [:index, :destroy]
   #
   # It is now quite complex to understand what this controller does.
-  before_action :authenticate_user!, only: [:create, :destroy]
 
   def index
   end
 
   def create
+    authenticate_user!
     @answer = current_user.answers.build(answer_params.merge(question_id: params[:question_id]))
     if @answer.save
       render status: 200, json: {
@@ -41,6 +41,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
+    authenticate_user!
     question = Question.find(params[:question_id])
     answer = question.answers.find(params[:id])
     if current_user.id == answer.user_id
