@@ -17,14 +17,14 @@ describe User do
   # Your taste will guide you here but in general don't DRY test code so much
   # that it would chafe... :-)
   #
-  before(:each) { @user = FactoryGirl.create(:user) }
+  before(:each) { @user = User.create(name: "George McGeorge", email: "george@george.com", password: "georgeisthebest") }
 
   subject { @user }
 
   it { should respond_to(:email) }
 
   it "#email returns a string" do
-    expect(@user.email).to match 'test@example.com'
+    expect(@user.email).to match 'george@george.com'
   end
 
 end
