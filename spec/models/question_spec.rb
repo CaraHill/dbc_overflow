@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-
   before do
     @question = Question.create(content: "This is a question?")
   end

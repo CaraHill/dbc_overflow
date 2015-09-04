@@ -30,17 +30,11 @@ class QuestionsController < ApplicationController
 
   def remove
     authenticate_user!
+    question = Question.find(params[:id])
+
     if current_user.id == question.user_id
-      question = Question.find(params[:id])
-    else
-      render status: 400, json: {
-        message: "Your request was not successful. Please try again."
-      }
-    end
-
-    remove_question_answers(question)
-
-    if question.destroy
+      remove_question_answers(question)
+      question.destroy
       render status: 200, json: {
         message: "Your request was successful."
       }

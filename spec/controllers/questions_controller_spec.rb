@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, :type => :controller do
-
   describe "#index" do
-
     describe "response" do
       it "responds successfully with an HTTP 200 status code" do
         get :index
@@ -35,7 +33,6 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 
   describe "#show" do
-
     before do
       @user = FactoryGirl.create(:user)
       @question = Question.create(content: "Is this a question?", user_id: @user.id)
@@ -56,11 +53,9 @@ RSpec.describe QuestionsController, :type => :controller do
     it "renders an http status of 200 if successful" do
       expect(response).to have_http_status(200)
     end
-
   end
 
   describe "#create" do
-
     before do
       user = FactoryGirl.create(:user)
       sign_in(user)
@@ -77,7 +72,6 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 
   describe "#remove" do
-
     before do
       user = FactoryGirl.create(:user)
       sign_in(user)
@@ -98,5 +92,4 @@ RSpec.describe QuestionsController, :type => :controller do
       expect(response).to have_http_status(200)
     end
   end
-
 end
