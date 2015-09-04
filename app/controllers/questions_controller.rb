@@ -46,17 +46,12 @@ class QuestionsController < ApplicationController
     # refactoring does not change the no. of possible paths of execution - it
     # just surfaces them better for our brains to reason about.
     #
-    if current_user.id == question.user_id
-      Answer.where(question_id: question.id).destroy_all
-      if question.destroy
-        render status: 200, json: {
-          message: "Your request was successful."
-        }
-      else
-        render status: 400, json: {
-          message: "Your request was not successful. Please try again."
-        }
-      end
+    remove_question_answers(question)
+
+    if question.destroy
+      render status: 200, json: {
+        message: "Your request was successful."
+      }
     else
       render status: 400, json: {
         message: "Your request was not successful. Please try again."
@@ -68,5 +63,16 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:content)
+  end
+
+  def remove_question_answers(question)
+    authenticate_user!
+    if current_user.id == question.user_id
+      Answer.where(question_id: question.id).destroy_all
+    else
+      render status: 400, json: {
+        message: "Your request was not successful. Please try again."
+      }
+    end
   end
 end
